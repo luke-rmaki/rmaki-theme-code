@@ -1,21 +1,47 @@
 {
-    "name": "rmaki-theme-code",
-    "displayName": "rmaki-theme-code",
-    "description": "",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.57.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "contributes": {
-        "themes": [
-            {
-                "label": "Rmaki Code",
-                "uiTheme": "vs-dark",
-                "path": "./themes/Rmaki Code-color-theme.json"
-            }
-        ]
-    }
+  "name": "rmaki-theme-code",
+  "displayName": "rmaki-theme-code",
+  "author": "Luke Ruokaismaki",
+  "description": "",
+  "version": "0.0.1",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.57.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "scripts": {
+    "start": "node ./src/index",
+    "dev": "nodemon --ignore './themes/Rmaki Code-color-theme.json' ./src/index"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Rmaki Code",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Rmaki Code-color-theme.json"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.10",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-typescript": "^11.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-rmaki": "1.0.5",
+    "eslint-plugin-html": "^6.1.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.1.1",
+    "typescript": "^4.0.3"
+  }
 }
