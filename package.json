@@ -1,0 +1,21 @@
+{
+    "name": "rmaki-theme-code",
+    "displayName": "rmaki-theme-code",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.57.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "Rmaki Code",
+                "uiTheme": "vs-dark",
+                "path": "./themes/Rmaki Code-color-theme.json"
+            }
+        ]
+    }
+}
