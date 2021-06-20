@@ -1,37 +1,38 @@
-import { writeFile } from 'fs/promises';
+/* eslint-disable no-console */
+import { writeFile, readdir } from 'fs/promises';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 import { template } from './template.js';
-import { activitybar } from './elements/activitybar.js';
-import { editor } from './elements/editor.js';
-import { sidebar } from './elements/sidebar.js';
-import { window } from './elements/window.js';
-import { titlebar } from './elements/titlebar.js';
-import { actions } from './elements/actions.js';
-import { button } from './elements/button.js';
-import { dropdown } from './elements/dropdown.js';
-import { input } from './elements/input.js';
-import { scrollbar } from './elements/scrollbar.js';
 
 async function main() {
-  template.colors = {
-    ...activitybar,
-    ...editor,
-    ...sidebar,
-    ...window,
-    ...titlebar,
-    ...actions,
-    ...button,
-    ...dropdown,
-    ...input,
-    ...scrollbar,
-  };
+  try {
+    // use this because ESM doesn't come with __dirname
+    const dir = dirname(fileURLToPath(import.meta.url));
+    // create path to elements folder
+    const elements = join(dir, `elements`);
+    // get list of files in elements
+    const files = await readdir(elements);
+    // map over list and dynamically import. Use Promise all since maping with an async function returns an array of promises
+    const data = await Promise.all(
+      files.map(async (file) => {
+        const module = await import(`./elements/${file}`);
+        console.log(`imported ${file}`);
+        return module[Object.keys(module)[0]];
+      })
+    );
+    const colors = Object.assign({}, ...data);
+    template.colors = colors;
+  } catch (error) {
+    console.log(`Something went wrong importing the elements ${error}`);
+  }
   try {
     await writeFile(
       `./themes/Rmaki Code-color-theme.json`,
       JSON.stringify(template)
     );
   } catch (error) {
-    console.log(error);
+    console.log(`Something went wrong writing the manifest ${error}`);
   }
 }
 

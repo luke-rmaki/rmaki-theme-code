@@ -4,3 +4,4 @@
 
 - [x] Hover colors
 - [ ] Input validations
+- [ ] Minimap
